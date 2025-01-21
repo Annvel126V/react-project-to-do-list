@@ -36,3 +36,12 @@ export const deleteTask = createAsyncThunk(
     }
   }
 );
+
+export const updateTask = createAsyncThunk("task/update", async (dispathc) => {
+  try {
+    const response = await toDoList.patch(`/tasks/${task.id}`, task);
+    dispathc({ type: "task/update", payload: response.data });
+  } catch (err) {
+    return thankAPI.rejectWithValue(err.message);
+  }
+});
